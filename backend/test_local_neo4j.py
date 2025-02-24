@@ -21,8 +21,8 @@ print(f"OPENAI_API_KEY: {'*' * len(openai.api_key) if openai.api_key else None}"
 
 def query_neo4j(query):
     try:
-        # driver = GraphDatabase.driver(neo4j_uri)
-        driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_user, neo4j_password))
+        driver = GraphDatabase.driver(neo4j_uri)
+        # driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_user, neo4j_password))
         with driver.session() as session:
             result = session.run("RETURN 'Connected to Neo4j!'")
             print(result.single()[0])  # Should print "Connected to Neo4j!"
@@ -51,5 +51,5 @@ def generate_text(prompt):
 neo4j_query = "MATCH (n) RETURN n LIMIT 5"
 print(query_neo4j(neo4j_query))
 
-# openai_prompt = "Write a short story about a robot learning to love."
-# print(generate_text(openai_prompt))
+openai_prompt = "Write a short story about a robot learning to love."
+print(generate_text(openai_prompt))
